@@ -47,14 +47,17 @@ WORKDIR /app
 # COPY: Copies files or directories from the host machine into the container.
 # This copies all the files from the current directory (.) to the /app directory inside the container.
 COPY . /app
+# you can use `.dockerignore` to ignore files
 
 # RUN: Executes commands in the container to install dependencies or perform setup tasks.
 # In this case, it's installing the Python dependencies listed in requirements.txt.
 RUN pip install --no-cache-dir -r requirements.txt
+# This command runs only when the container is built.
 
 # CMD: Specifies the command to run when the container starts.
 # Here, it runs a Python script (app.py) when the container is started.
 CMD ["python", "app.py"]
+# This command runs the when the container starts.
 
 # EXPOSE: Exposes a port from the container to the host machine.
 # This allows the container to listen on port 8080.
@@ -130,6 +133,50 @@ Logging, Healthchecks, Build contexts, Secrets, and more.
 ## Docker Compose
 
 Used to handle multiple docker containers using `docker-compose.yml` file
+
+**example**
+
+```yaml
+version: "3.9" # Compose file format version
+
+services:
+  frontend:
+    image: node:18 # Base image with Node.js v18
+    working_dir: /app # Set working directory inside the container
+    volumes:
+      - ./frontend:/app # Mount local frontend code into container
+    ports:
+      - "3000:3000" # Expose frontend dev server on port 3000
+    command: ["npm", "start"] # Start React dev server
+    environment:
+      - NODE_ENV=development # Environment variable for React
+    depends_on:
+      - backend # Wait for backend to be ready
+
+  backend:
+    build: ./backend # Build backend image from Dockerfile in ./backend
+    working_dir: /app # Set working directory inside the container
+    volumes:
+      - ./backend:/app # Mount local backend code into container
+    ports:
+      - "5000:5000" # Expose backend API on port 5000
+    command: ["python", "app.py"] # Run backend app
+    environment:
+      - APP_ENV=production # Environment variable for backend
+      - MONGO_URI=mongodb://mongo:27017/mydb # MongoDB connection string
+    depends_on:
+      - mongo # Wait for MongoDB before starting
+
+  mongo:
+    image: mongo:6 # Official MongoDB image version 6
+    ports:
+      - "27017:27017" # Expose MongoDB on default port
+    volumes:
+      - mongo_data:/data/db # Persist MongoDB data
+
+volumes:
+  mongo_data: # Named volume for MongoDB persistence
+```
 
 ~~Next up **Kubernetes**. hopefully soon :)~~
 
