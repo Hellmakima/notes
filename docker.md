@@ -22,6 +22,7 @@
 
 ## Docker Desktop
 
+- you need to keep this running to use the cli commands
 - easily manage your images and containers
 - tap into your image's resource usage
 
@@ -58,10 +59,12 @@ CMD ["python", "app.py"]
 # EXPOSE: Exposes a port from the container to the host machine.
 # This allows the container to listen on port 8080.
 EXPOSE 8080
+# you'll need to run `docker run -p 8080:8080 <image_name>` to access the app
 
 # ENV: Sets environment variables for the container.
 # Here we define the APP_ENV variable to specify the environment as 'production'.
 ENV APP_ENV=production
+# use .env for sensitive data like secrets, api keys, etc. Do not use ENV for this
 ```
 
 **Layer Caching in Docker** (each command in a Dockerfile creates a layer)
@@ -72,12 +75,14 @@ Docker optimizes image builds by caching each layer, so the order in the Dockerf
 ## Images
 
 A Docker image is a lightweight, standalone, and executable software package that serves as a read-only template for creating Docker containers. It contains:
+
 - Application code
 - Runtime environment (e.g., Python, Node.js)
 - System tools and libraries
 - Settings and configurations (e.g., Environmental variables, network configurations)
 
 Once done with your Dockerfile, you can build the image with `docker build .` (Dockerfile is in curr dir)
+
 - name your build: `docker build -t my_app .`
 - help: `docker build --help`
 
@@ -85,8 +90,8 @@ Once done with your Dockerfile, you can build the image with `docker build .` (D
 
 - push to docker hub: `docker push <image_name>`
 - pull from docker hub: `docker pull <image_name>`
-You can also use github packages to share your images.
-Docker Hub is a registry for sharing Docker images.
+  You can also use github packages to share your images.
+  Docker Hub is a registry for sharing Docker images.
 
 ---
 
@@ -116,7 +121,7 @@ Multi-stage builds allow you to build an image from multiple stages. This can be
 
 - Docker Swarm is Docker's native clustering and orchestration tool, allowing you to deploy and manage multi-container applications across a cluster of machines.
 
-- It’s a simpler alternative to Kubernetes for managing containers at scale, although Kubernetes is more feature-rich.
+- It's a simpler alternative to Kubernetes for managing containers at scale, although Kubernetes is more feature-rich.
 
 ### And Many More
 
@@ -126,6 +131,6 @@ Logging, Healthchecks, Build contexts, Secrets, and more.
 
 Used to handle multiple docker containers using `docker-compose.yml` file
 
-I only know this much. Last update: 11th September 2025
+~~Next up **Kubernetes**. hopefully soon :)~~
 
-Next up **Kubernetes**. hopefully soon :)
+Kubernetes is an open-source container orchestration platform that automates deploying, scaling, and managing containerized applications. It was built by Google in 2014 based on an internal tool called Borg. Considering the complexity and benefits of kubernetes, I'll skip it for now.
