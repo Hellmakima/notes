@@ -134,8 +134,14 @@ Logging, Healthchecks, Build contexts, Secrets, and more.
 
 Used to handle multiple docker containers using `docker-compose.yml` file
 
-- `docker compose up` creates containers (if missing) as specified in this file. Starts them, reuses existing volumes
-- `docker compose down` Stops AND deletes the containers. Does NOT delete data unless you add `-v`, networks are removed, images stay
+- `docker compose up` Creates containers (if missing) and starts them. Reuses existing volumes.
+- `docker compose up -d` Same as `up`, but runs containers in the background (detached).
+- `docker compose down` Stops AND deletes containers. Does NOT delete data unless `-v` is used. Networks are removed, images stay.
+- `docker compose start` Starts existing stopped containers. Does NOT create new ones.
+- `docker compose stop` Stops running containers without deleting them.
+- `docker compose restart` Stops then starts containers.
+- `docker compose ps` Shows status of containers.
+- `docker compose logs` Shows container logs.
 
 **example of compose.yml file**
 
@@ -184,4 +190,3 @@ volumes:
 ~~Next up **Kubernetes**. hopefully soon :)~~
 
 Kubernetes is an open-source container orchestration platform that automates deploying, scaling, and managing containerized applications. It was built by Google in 2014 based on an internal tool called Borg. Considering the complexity and benefits of kubernetes, I'll skip it for now.
-
