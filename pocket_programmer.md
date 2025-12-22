@@ -9,10 +9,14 @@
   - **Termux**
 
     - Huge OSS community
-    - Get from [F-Droid](https://f-droid.org/en/packages/com.termux/) or [GitHub](https://github.com/termux/termux-app/releases)
+    - Get from [GitHub](https://github.com/termux/termux-app/releases)
     - more advantages if phone is rooted
     - Use `termux-setup-storage` to access device storage
     - For better performance, consider using a Linux chroot environment via [Andronix](https://andronix.app/)
+    - [lazyvim setup](https://www.youtube.com/watch?v=w6zAa3ebTFc)
+    - Use `termux-change-repo` to select single mirror if needed.
+    - then `pkg upgrade`
+    - long press and press style to get the styling app, use themes and fonts (tokyo dark, jetbrains mono)
 
   - **Terminus** – simple, great for SSH
 
@@ -197,16 +201,12 @@ _Prefferably use USB cable for low latency._
 
 ## Local LLM on Android
 
-1. [termux setup](https://www.youtube.com/watch?v=s3TXc-jiQ40) (upto `pkg upgrade`)
-2. [llamafile github](https://github.com/mozilla-ai/llamafile/releases )
-3. look up `tinyllama guff` and download guff file from hugginf face
-
-- [tutorial](https://www.youtube.com/watch?v=iaJqMFTBgGw )
-- i got Q4 K M (super stupid model)
-- or look for [other one](https://huggingface.co/unsloth/gpt-oss-20b-GGUF/tree/main)
-- [llamafile models](https://huggingface.co/models?library=llamafile&sort=downloads)
-- [time llms comparisons](https://artificialanalysis.ai/models/open-source/tiny)
-
-4. move them to termux and `chmod +x llamafile`
-5. run `llamafile -m <model_name>.guff`
-6. [lazyvim](https://www.youtube.com/watch?v=w6zAa3ebTFc)
+- downlaod [llamafile](https://github.com/mozilla-ai/llamafile/releases)
+- look up `tinyllama guff` and download guff file from hugginf face
+  - [tutorial](https://www.youtube.com/watch?v=iaJqMFTBgGw )
+  - i got Q4 K M (super stupid model)
+  - or look for [other ones](https://huggingface.co/unsloth/gpt-oss-20b-GGUF/tree/main)
+  - [llamafile models](https://huggingface.co/models?library=llamafile&sort=downloads)
+  - [time llms comparisons](https://artificialanalysis.ai/models/open-source/tiny)
+- move them to termux and `chmod +x llamafile`
+- run `llamafile -m <model_name>.guff`
